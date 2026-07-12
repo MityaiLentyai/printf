@@ -6,12 +6,11 @@
 /*   By: dzzayats <dzzayats@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 23:21:54 by dzzayats          #+#    #+#             */
-/*   Updated: 2026/07/12 19:12:35 by dzzayats         ###   ########.fr       */
+/*   Updated: 2026/07/12 22:57:36 by dzzayats         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 #include <stdarg.h>
 
 // void type_converter(char c,va_list argument,const char *string)
@@ -27,18 +26,20 @@
 //         }
 // }
 
-int     mini_printf(const char *string, ...)
+int	ft_printf(const char *string, ...)
 {
-	va_list	arguments;
-	int		i;
-        int     counter;
-	char	c;
-	char	*s;
-	int		d;
-        unsigned int    u;
-
+	va_list			arguments;
+	int				i;
+	int				counter;
+	char			c;
+	char			*s;
+	int				d;
+	unsigned int	u;
+        unsigned int    x;
+        unsigned int    X;
+        
 	va_start(arguments, string);
-        counter = 0;
+	counter = 0;
 	i = 0;
 	while (string[i])
 	{
@@ -55,35 +56,50 @@ int     mini_printf(const char *string, ...)
 			i++;
 		}
 		else if (string[i] == '%' && ((string[i + 1] == 'd') ||
-				(string[i + 1] == 'i')))
+					(string[i + 1] == 'i')))
 		{
 			d = va_arg(arguments, int);
 			counter += ft_putnbr(d);
 			i++;
 		}
-                else if (string[i] == '%' && string[i + 1] == 'u')
+		else if (string[i] == '%' && string[i + 1] == 'u')
 		{
 			u = va_arg(arguments, unsigned int);
 			counter += ft_putnbr_unsigned(u);
 			i++;
 		}
-                
-		else                 
-                {
-                        ft_putchar(string[i]);
-                        counter++;
-                }
+		else if (string[i] == '%' && string[i + 1] == 'x')
+		{
+			x = va_arg(arguments, unsigned int);
+			counter += ft_puthex_lower(x);
+			i++;
+		}
+		else if (string[i] == '%' && string[i + 1] == 'X')
+		{
+			X = va_arg(arguments, unsigned int);
+			counter += ft_puthex_upper(X);
+			i++;
+		}
+		else
+		{
+                        if (string[i] == '%' && string[i+1] == '%')
+                                i++;
+			ft_putchar(string[i]);
+			counter++;
+		}
 		i++;
 	}
 	va_end(arguments);
-        return (counter);
+	return (counter);
 }
 
 #include <stdio.h>
+
 int	main(void)
 {
-        int aa = printf("My cunt is %c %s%s %d\n", 'A', "Proper", "Bober", 0);
-	int a = mini_printf("My cunt is %c %s%s %d\n", 'A', "Proper", "Bober", 0);
-        printf("original count:%d\nmy count:%d\n",aa,a);
+	int	aa = printf("%%My cunt is %c %%%% %s%s %X\n%%", 'A', "Proper", "Bober", -5);
+	int	a = ft_printf("%%My cunt is %c %%%% %s%s %X\n%%", 'A', "Proper", "Bober", -5);
+
+	printf("original count:%d\nmy count:%d\n", aa, a);
 	return (0);
 }
