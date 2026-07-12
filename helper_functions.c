@@ -12,7 +12,20 @@
 
 #include <unistd.h>
 
-int ft_putchar(char c)
+int    ft_putchar(char c)
 {
         return (write(1,&c, 1));
+}
+
+int    ft_putstr(char *s)
+{
+        int count;
+
+        count = 0;
+        while (*s && *s)
+        {
+                ft_putchar(*s++);
+                count++;
+        }
+        return count;
 }

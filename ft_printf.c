@@ -6,81 +6,55 @@
 /*   By: dzzayats <dzzayats@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 23:21:54 by dzzayats          #+#    #+#             */
-/*   Updated: 2026/07/11 09:16:39 by dzzayats         ###   ########.fr       */
+/*   Updated: 2026/07/11 19:10:02 by dzzayats         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include <stdio.h>
 #include <stdarg.h>
-#include <unistd.h>
 
-static  int     helper_func(const char f, va_list arg)
-{
-        int     len;
-        
-        len = 0;
-	if (f == '%')
-		len = ft_putchar('%');
-	else if (f == 'c')
-		len = ft_putchar(va_arg(arg, int));
-        return (len);
-}
+// void type_converter(char c,va_list argument,const char *string)
+// {
+//         va_list args_copy;
+//         va_copy(args_copy,argument);
 
-int my_printf(const char *format, ...)
+//         if (c == '%')
+//         {
+//                 string++;
+//                 if (*string == 'c')
+//                         ft_putchar((char)va_arg(args_copy,int));
+//         }
+// }
+
+void mini_printf(const char *string, ...) 
 {
-        va_list args;
-        int     input_chars;
+        va_list arguments;
+        va_start(arguments,string);
         int     i;
-        
-        input_chars = 0;
+        char *s;
+
         i = 0;
-        if (!format)
-                return (-1);
-        va_start (args,format);
-        while (format[i])
+        while (string[i])
         {
-                if (format[i] != 0)
+                if (string[i] == '%' && string[i+1] == 'c')
                 {
-                        
+                        ft_putchar((char)va_arg(arguments,int));
+                        i++;
                 }
+                else if (string[i] == '%' && string[i+1] == 's')
+                {
+                        s = va_arg(arguments,char *);
+                        ft_putstr(s);
+                        i++;
+                }
+                else ft_putchar(string[i]);
                 i++;
         }
-        
-
-        va_end (args);
-        return (input_chars);
-}
-        
-
-int main()
-{
-        my_printf("%c", 'c');
-        
+        va_end(arguments);
 }
 
-// #include <stdio.h>
-// #include <stdarg.h>
-
-// void mini_printf(const char *format, ...) {
-//     va_list args;
-//     va_start(args, format);
-
-//     for (int i = 0; format[i] != '\0'; i++) {
-//         // Check for the %c placeholder
-//         if (format[i] == '%' && format[i + 1] == 'c') {
-//             // Retrieve as int due to default argument promotion
-//             char c = (char)va_arg(args, int); 
-//             putchar(c);
-//             i++; // Skip the 'c' character
-//         } else {
-//             putchar(format[i]); // Print regular characters
-//         }
-//     }
-
-//     va_end(args);
-// }
-
-// int main() {
-//     mini_printf("Hello %c%c%c\n", 'A', 'B', '!');
-//     return 0;
-// }
+int main() {
+    mini_printf("%c%s%c\n", 'A',"Bober", 'C');
+    return 0;
+}
