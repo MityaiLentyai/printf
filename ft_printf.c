@@ -6,7 +6,7 @@
 /*   By: dzzayats <dzzayats@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 23:21:54 by dzzayats          #+#    #+#             */
-/*   Updated: 2026/07/11 19:10:02 by dzzayats         ###   ########.fr       */
+/*   Updated: 2026/07/12 03:21:25 by dzzayats         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,34 +27,45 @@
 //         }
 // }
 
-void mini_printf(const char *string, ...) 
+void	mini_printf(const char *string, ...)
 {
-        va_list arguments;
-        va_start(arguments,string);
-        int     i;
-        char *s;
+	va_list	arguments;
+	int		i;
+	char	c;
+	char	*s;
+        int     d;
 
-        i = 0;
-        while (string[i])
-        {
-                if (string[i] == '%' && string[i+1] == 'c')
-                {
-                        ft_putchar((char)va_arg(arguments,int));
-                        i++;
-                }
-                else if (string[i] == '%' && string[i+1] == 's')
-                {
-                        s = va_arg(arguments,char *);
-                        ft_putstr(s);
-                        i++;
-                }
-                else ft_putchar(string[i]);
-                i++;
-        }
-        va_end(arguments);
+	va_start(arguments, string);
+	i = 0;
+	while (string[i])
+	{
+                if (string[i] == '%' && string[i + 1] == 'c')
+		{
+                        c = va_arg(arguments, int);
+			ft_putchar(c); 
+			i++;
+		}
+		else if (string[i] == '%' && string[i + 1] == 's')
+		{
+			s = va_arg(arguments, char *);
+			ft_putstr(s);
+			i++;
+		}
+		else if (string[i] == '%' && string[i + 1] == 'd')
+		{
+			d = va_arg(arguments, int);
+			ft_putnbr(d);
+			i++;
+		}
+
+		else ft_putchar(string[i]);
+		i++;
+	}
+	va_end(arguments);
 }
 
-int main() {
-    mini_printf("%c%s%c\n", 'A',"Bober", 'C');
-    return 0;
+int	main(void)
+{
+	mini_printf("My cunt is %c %s%s %d\n", 'A',"Proper", "Bober", 123);
+	return (0);
 }

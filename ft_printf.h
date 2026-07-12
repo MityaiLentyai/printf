@@ -10,6 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_putchar(char c);
-int ft_putstr(char *str);
+#define FT_PRINTF_H
+#ifdef FT_PRINTF_H
 
+#include <unistd.h>
+
+void ft_putchar(char c);
+void ft_putstr(char *str);
+void ft_putnbr(int d);
+
+
+#endif
