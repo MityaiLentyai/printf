@@ -1,12 +1,12 @@
 SRC = 	ft_printf.c \
-
+	helper_functions.c \
+	helper_functions_2.c \
+	
 
 OBJ = $(SRC:.c=.o)
 CC = gcc
 
 CFLAGS += -Wall -Werror -Wextra
-
-LIBFT = libft/libft.a
 
 NAME = libftprintf.a
 

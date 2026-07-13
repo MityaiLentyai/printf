@@ -6,7 +6,7 @@
 /*   By: dzzayats <dzzayats@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 23:21:54 by dzzayats          #+#    #+#             */
-/*   Updated: 2026/07/12 22:57:36 by dzzayats         ###   ########.fr       */
+/*   Updated: 2026/07/13 06:15:27 by dzzayats         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,66 +26,46 @@
 //         }
 // }
 
+static int	print_arg(char spec, va_list ap)
+{
+	if (spec == 'c')
+		return (ft_putchar(va_arg(ap, int)));
+	if (spec == 's')
+		return (ft_putstr(va_arg(ap, char *)));
+	if (spec == 'd' || spec == 'i')
+		return (ft_putnbr(va_arg(ap, int)));
+	if (spec == 'u')
+		return (ft_putnbr_unsigned(va_arg(ap, unsigned int)));
+	if (spec == 'x')
+		return (ft_puthex_lower(va_arg(ap, unsigned int)));
+	if (spec == 'X')
+		return (ft_puthex_upper(va_arg(ap, unsigned int)));
+        if (spec == 'p')
+		return (ft_putpointer(va_arg(ap, void *)));
+	if (spec == '%')
+		return (ft_putchar('%'));
+	return (0);
+}
+
 int	ft_printf(const char *string, ...)
 {
-	va_list			arguments;
-	int				i;
-	int				counter;
-	char			c;
-	char			*s;
-	int				d;
-	unsigned int	u;
-        unsigned int    x;
-        unsigned int    X;
-        
+	va_list	arguments;
+	int		counter;
+	int		i;
+
 	va_start(arguments, string);
 	counter = 0;
 	i = 0;
 	while (string[i])
 	{
-		if (string[i] == '%' && string[i + 1] == 'c')
+		if (string[i] == '%')
 		{
-			c = va_arg(arguments, int);
-			counter += ft_putchar(c);
 			i++;
-		}
-		else if (string[i] == '%' && string[i + 1] == 's')
-		{
-			s = va_arg(arguments, char *);
-			counter += ft_putstr(s);
-			i++;
-		}
-		else if (string[i] == '%' && ((string[i + 1] == 'd') ||
-					(string[i + 1] == 'i')))
-		{
-			d = va_arg(arguments, int);
-			counter += ft_putnbr(d);
-			i++;
-		}
-		else if (string[i] == '%' && string[i + 1] == 'u')
-		{
-			u = va_arg(arguments, unsigned int);
-			counter += ft_putnbr_unsigned(u);
-			i++;
-		}
-		else if (string[i] == '%' && string[i + 1] == 'x')
-		{
-			x = va_arg(arguments, unsigned int);
-			counter += ft_puthex_lower(x);
-			i++;
-		}
-		else if (string[i] == '%' && string[i + 1] == 'X')
-		{
-			X = va_arg(arguments, unsigned int);
-			counter += ft_puthex_upper(X);
-			i++;
+			counter += print_arg(string[i], arguments);
 		}
 		else
 		{
-                        if (string[i] == '%' && string[i+1] == '%')
-                                i++;
-			ft_putchar(string[i]);
-			counter++;
+			counter += ft_putchar(string[i]);
 		}
 		i++;
 	}
@@ -93,13 +73,16 @@ int	ft_printf(const char *string, ...)
 	return (counter);
 }
 
-#include <stdio.h>
+// #include <stdio.h>
 
-int	main(void)
-{
-	int	aa = printf("%%My cunt is %c %%%% %s%s %X\n%%", 'A', "Proper", "Bober", -5);
-	int	a = ft_printf("%%My cunt is %c %%%% %s%s %X\n%%", 'A', "Proper", "Bober", -5);
+// int	main(void)
+// {
+//         int aaa = 5;
+//         int *ptrAAA = &aaa;
+// 	int	aa = printf("PTR: %p \n", ptrAAA);
+// 	int	a = ft_printf("PTR: %p \n", ptrAAA);
 
-	printf("original count:%d\nmy count:%d\n", aa, a);
-	return (0);
-}
+
+// 	printf("original count:%d\nmy count:%d\n", aa, a);
+// 	return (0);
+// }

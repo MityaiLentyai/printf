@@ -6,7 +6,7 @@
 /*   By: dzzayats <dzzayats@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 08:53:10 by dzzayats          #+#    #+#             */
-/*   Updated: 2026/07/12 21:29:20 by dzzayats         ###   ########.fr       */
+/*   Updated: 2026/07/13 04:45:19 by dzzayats         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,20 @@ int	ft_putstr(char *s)
 
 int	ft_putnbr(int n)
 {
-	char		temp;
-	const char	minus = '-';
+	int	count;
 
+	count = 0;
 	if (n == -2147483648)
-	{
-		write(1, "-2147483648", 11);
 		return (write(1, "-2147483648", 11));
-	}
 	if (n < 0)
 	{
+		count += write(1, "-", 1);
 		n *= -1;
-		return (write(1, &minus, 1));
 	}
-	temp = ((n % 10) + '0');
-	if ((n / 10) > 0)
-		ft_putnbr(n / 10);
-	return (write(1, &temp, 1));
+	if (n >= 10)
+		count += ft_putnbr(n / 10);
+	count += ft_putchar((n % 10) + '0');
+	return (count);
 }
 
 int	ft_putnbr_unsigned(unsigned int n)
