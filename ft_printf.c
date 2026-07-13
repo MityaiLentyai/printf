@@ -6,25 +6,12 @@
 /*   By: dzzayats <dzzayats@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 23:21:54 by dzzayats          #+#    #+#             */
-/*   Updated: 2026/07/13 18:14:28 by dzzayats         ###   ########.fr       */
+/*   Updated: 2026/07/14 00:07:12 by dzzayats         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdarg.h>
-
-// void type_converter(char c,va_list argument,const char *string)
-// {
-//         va_list args_copy;
-//         va_copy(args_copy,argument);
-
-//         if (c == '%')
-//         {
-//                 string++;
-//                 if (*string == 'c')
-//                         ft_putchar((char)va_arg(args_copy,int));
-//         }
-// }
 
 static int	print_arg(char spec, va_list ap)
 {
@@ -72,16 +59,3 @@ int	ft_printf(const char *string, ...)
 	va_end(arguments);
 	return (counter);
 }
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-//         int aaa = 5;
-//         int *ptrAAA = &aaa;
-// 	int	aa = printf("PTR: %p \n", ptrAAA);
-// 	int	a = ft_printf("PTR: %p \n", ptrAAA);
-
-// 	printf("original count:%d\nmy count:%d\n", aa, a);
-// 	return (0);
-// }

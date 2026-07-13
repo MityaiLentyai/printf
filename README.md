@@ -21,6 +21,13 @@ This repository contains a custom implementation of the `ft_printf` function in 
    - `ft_printf.h` for function declarations and constants
 8. Use `make fclean` to remove compiled object files and the archive when finished.
 
+### Test Usage
+
+```bash
+make
+cc main.c libftprintf.a
+```
+
 ## Resources
 
 - `man 3 printf` for standard `printf` behavior and supported format specifiers
@@ -29,3 +36,7 @@ This repository contains a custom implementation of the `ft_printf` function in 
 - `man7.org` for additional Linux man pages and documentation
 -  different youtube sources with explanations on variadic functions
 
+
+## AI USE
+
+AI was used to partially help write this readme. Along with explanation for some mechanics (including compilation flag attributes and edge case ironing)

@@ -6,7 +6,7 @@
 /*   By: dzzayats <dzzayats@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 08:53:10 by dzzayats          #+#    #+#             */
-/*   Updated: 2026/07/13 04:45:19 by dzzayats         ###   ########.fr       */
+/*   Updated: 2026/07/14 00:02:59 by dzzayats         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	ft_putstr(char *s)
 {
 	int	count;
 
+	if (!s)
+		return (write(1, "(null)", 6));
 	count = 0;
 	while (*s && *s)
 	{
