@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ft_printf.h"
 
 int	ft_puthex_lower(unsigned int n)
@@ -22,23 +21,24 @@ int	ft_puthex_upper(unsigned int n)
 {
 	return (ft_puthex_base(n, "0123456789ABCDEF"));
 }
-int     ft_putpointer(void *ptr)
+
+int	ft_putpointer(void *ptr)
 {
-        uintptr_t u_addres;
-        char    *base;
-        int	count;
-        
-        if (!ptr)
-                return (write(1,"(nil)", 5));
-        count = 0;
-        count += write (1, "0x", 2);
-        
-        u_addres = (uintptr_t)ptr;
-        base = "0123456789abcdef";
-        count += ft_puthex_pointer(u_addres, base);
-        return (count);
+	uintptr_t	u_addres;
+	char		*base;
+	int			count;
+
+	if (!ptr)
+		return (write(1, "(nil)", 5));
+	count = 0;
+	count += write(1, "0x", 2);
+	u_addres = (uintptr_t) ptr;
+	base = "0123456789abcdef";
+	count += ft_puthex_pointer(u_addres, base);
+	return (count);
 }
-  int	ft_puthex_pointer(uintptr_t n, const char *base)
+
+int	ft_puthex_pointer(uintptr_t n, const char *base)
 {
 	int	count;
 

@@ -6,7 +6,7 @@
 /*   By: dzzayats <dzzayats@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 23:21:54 by dzzayats          #+#    #+#             */
-/*   Updated: 2026/07/13 06:15:27 by dzzayats         ###   ########.fr       */
+/*   Updated: 2026/07/13 18:14:28 by dzzayats         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	print_arg(char spec, va_list ap)
 		return (ft_puthex_lower(va_arg(ap, unsigned int)));
 	if (spec == 'X')
 		return (ft_puthex_upper(va_arg(ap, unsigned int)));
-        if (spec == 'p')
+	if (spec == 'p')
 		return (ft_putpointer(va_arg(ap, void *)));
 	if (spec == '%')
 		return (ft_putchar('%'));
@@ -81,7 +81,6 @@ int	ft_printf(const char *string, ...)
 //         int *ptrAAA = &aaa;
 // 	int	aa = printf("PTR: %p \n", ptrAAA);
 // 	int	a = ft_printf("PTR: %p \n", ptrAAA);
-
 
 // 	printf("original count:%d\nmy count:%d\n", aa, a);
 // 	return (0);
